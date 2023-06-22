@@ -1,50 +1,49 @@
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.Arrays;
-
 public class Main {
-    public static int i = randomNumbers();
-    public static int n = bit();
-    public static void main (String args[]){
-        System.out.println(randomNumbers());
-        System.out.println(bit());
-        System.out.println(shortMax());
+    public static void main(String [] args) {
         System.out.println();
-        System.out.println(shortMin());
+        System.out.println("select * from students where " + domashka1());
         System.out.println();
-        System.out.println(Arrays.toString(maxArray));
-        System.out.println();
-        System.out.println(Arrays.toString(minArray));
+        System.out.println(domashka2());
     }
-    public static int randomNumbers(){
-        int minRandom = 0;
-        int maxRandom = 2000;
-        int randNum = ThreadLocalRandom.current().nextInt(minRandom, maxRandom + 1);
-        return randNum;
-    }
-    public static int bit(){
-        int n = Integer.highestOneBit(i);
-        return n;
-    }
-    static int [] maxArray = new int[Short.MAX_VALUE - i];
-    static int [] minArray = new int[i - Short.MIN_VALUE];
-    public static Void shortMax(){
-        int j = 0;
-        for (int x = i; x<=Short.MAX_VALUE; x++){
-            if (x%n==0) {
-                maxArray[j] = x;
-//                System.out.print(x + ";");
-                j++;
+    static StringBuilder dz = new StringBuilder("Name:Ivanov, Country:Russia, City:Moscow, Age:Null");
+    static String result = "0";
+    public static String domashka1() {
+        int res = dz.indexOf("Age:Null");
+        for (int i = 0; i < dz.length(); i++) {
+            if (i < res-2) {
+                if (dz.charAt(i) == ':'){
+                    dz.setCharAt(i,'=');
+                }
+            }
+            else {
+                dz.delete(i,dz.length());
             }
         }
-        return null;
+        result = dz.toString();
+        return result;
     }
-    public static Void shortMin(){
-        int j = 0;
-        for (int x = Short.MIN_VALUE; x<i; x++){
-            if (x%n!=0){
-                minArray[j] = x;
-//                System.out.print(x + ";");
-                j++;
+
+    static String[] fam = {"Иванов", "Петрова", "Краснов"};
+    static String[] ocenka = {"5", "4", "5"};
+    static String[] predmet = {"Математика", "Информатика", "Физика"};
+    static StringBuilder dz2 = new StringBuilder ("Студент x получил y по предмету z");
+
+    public static Void domashka2() {
+        result = dz2.toString();
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < dz2.length(); i++) {
+                if (dz2.charAt(i) == 'x') {
+                    dz2.delete(i, i+1);
+                    dz2.insert(i, fam[j]);
+                } else if (dz2.charAt(i) == 'y') {
+                    dz2.delete(i, i+1);
+                    dz2.insert(i, ocenka[j]);
+                } else if (dz2.charAt(i) == 'z') {
+                    dz2.delete(i, i+1);
+                    dz2.insert(i, predmet[j]);
+                    System.out.println(dz2);
+                    dz2 = new StringBuilder(result);
+                }
             }
         }
         return null;
